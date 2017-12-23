@@ -35,11 +35,14 @@ void fillText(cv::Mat frame, double fontsize);
 vector<vector<cv::Point>> getContours(cv::Mat frame);
 
 
+cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fontSize);
+
+
 
 int main( int argc, char** argv )
 {
     
-    string imageName("/home/henry/Documents/opencv/matrixFrame/opencv_nic2.jpg"); // by default
+    string imageName("/home/henry/Documents/github_dev/matrixFrame/opencv_nic2.jpg"); // by default
 
 
     int exit = 0;
@@ -173,8 +176,6 @@ void fillText(cv::Mat frame, double font){
     vector<cv::Point> textPos;
 
 
-
-
     int cols_steps = cols/font;
     int rows_steps = rows/font;
     cout << "Number of cols_steps: " << cols_steps << endl;
@@ -182,13 +183,21 @@ void fillText(cv::Mat frame, double font){
     
     int rows_iter = 0;
     int cols_iter = font;
+    int test1 = 0;
 
     for(int j = 0; j < cols_steps; j++){
         for(int i = 0; i < rows_steps ; i++){
+            textPos.push_back(cv::Point(cols_iter,rows_iter));
             text = char(int(rng.uniform(0, 127)));
-            cout << "cols: " << cols_iter << " rows: " << rows_iter << endl;
-            cv::putText(frame, text, cv::Point(cols_iter,rows_iter), cv::FONT_HERSHEY_DUPLEX, 0.25, cv::Scalar(80, 100 , 30), 1, cv::LINE_8);
+            //cout << "cols: " << cols_iter << " rows: " << rows_iter << endl;
+
+
+
+
+            //cv::putText(frame, text, cv::Point(cols_iter,rows_iter), cv::FONT_HERSHEY_DUPLEX, 0.25, cv::Scalar(80, 100 , 30), 1, cv::LINE_8);
+            cv::putText(frame, text, textPos.at(test1), cv::FONT_HERSHEY_DUPLEX, 0.25, cv::Scalar(80, 100 , 30), 1, cv::LINE_8);
             rows_iter = rows_iter + font;
+            test1 += 1;
         }
         cols_iter = cols_iter + font; 
         rows_iter = 0 ;
@@ -200,6 +209,9 @@ void fillText(cv::Mat frame, double font){
     cv::imshow("filled rows", frame);
 
 }
+/*  Finds the contours in the frame, and returns
+    the pixel locations of each contour.
+    */
 vector<vector<cv::Point>> getContours(cv::Mat frame){
 
     cv::Mat canny_output;
@@ -213,4 +225,48 @@ vector<vector<cv::Point>> getContours(cv::Mat frame){
     cv::findContours(canny_output, contours, hierarchy, CV_RETR_TREE,CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
 
     return contours;    
+}
+/*  frameSize:  Contains width and height of frame
+    textPos:    Pointer which contains the positions of each location of text on frame
+    return:     The width and height of 
+    */
+cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fontSize){
+    double rows = double(frameSize.x);
+    double cols = double(frameSize.y);
+    char test = 100;
+    string text(&test);
+
+
+    // Needs to be tested
+    //int cols_steps = double(frameSize.x)/fontSize;
+    //int rows_steps = double(frameSize.y)/fontSize;
+
+
+    int cols_steps = cols/fontSize;
+    int rows_steps = rows/fontSize;
+    
+    int rows_iter = 0;
+    int cols_iter = fontSize;
+    int test1 = 0;
+
+    for(int j = 0; j < cols_steps; j++){
+        for(int i = 0; i < rows_steps ; i++){
+            textPos->push_back(cv::Point(cols_iter,rows_iter));
+            text = char(int(rng.uniform(0, 127)));
+            //cout << "cols: " << cols_iter << " rows: " << rows_iter << endl;
+
+
+
+
+            //cv::putText(frame, text, cv::Point(cols_iter,rows_iter), cv::FONT_HERSHEY_DUPLEX, 0.25, cv::Scalar(80, 100 , 30), 1, cv::LINE_8);
+            rows_iter = rows_iter + fontSize;
+            test1 += 1;
+        }
+        cols_iter = cols_iter + fontSize; 
+        rows_iter = 0 ;
+
+    }
+
+
+
 }
