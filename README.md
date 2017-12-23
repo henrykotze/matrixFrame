@@ -8,7 +8,13 @@ matrixFrame tries to create a "The Matrix" art of a input frame. As seen here:
 ----
 
 * Currently creating a playground for implementing the idea
-* Development is done using openCV 3.2.0
+* Development is done using openCV 3.2.0 
+* Compiler gcc 7.2.1
+
+## How to compile
+
+*   Currently: ```g++ opencv_test.cpp `pkg-congig --libs opencv` -std=c++11 -o opencvtest ```
+
 
 
 ## Future Plans
