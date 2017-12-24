@@ -39,6 +39,39 @@ cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fon
 
 
 
+class element {
+    public:
+        void setPosition(cv::Point pos);
+        void setColor(cv::Scalar);
+        cv::Point getPosition();
+        cv::Scalar getColor();
+        element(cv::Point, cv::Scalar);
+    private:
+        cv::Point textPos;
+        cv::Scalar color;
+};
+
+element::element(cv::Point pos, cv::Scalar colr){
+    textPos = pos;
+    color = colr;
+
+}
+
+void element::setColor(cv::Scalar colr){
+    color = colr;
+}
+
+void element::setPosition(cv::Point pos){
+    textPos = pos;
+}
+
+cv::Point element::getPosition(){
+    return textPos;
+}
+cv::Scalar element::getColor(){
+    return color;
+}
+
 int main( int argc, char** argv )
 {
     
@@ -77,11 +110,31 @@ int main( int argc, char** argv )
     // Creating Windows
  //   cv::namedWindow( "original image", cv::WINDOW_AUTOSIZE );
 
-    string text("meep");
-    //insert some text
-//    cv::putText(image, text, cv::Point(0,0), cv::FONT_HERSHEY_DUPLEX, fontsize, cv::Scalar(255, 0,3), 1, cv::LINE_8);
 
     fillText(image, 7);
+
+    vector<cv::Point>* textPosition = new vector<cv::Point>();
+    cout << " Entering Function \n";
+    cv::Point charSize = initMatrix(cv::Point(50,50), textPosition, 10.0);
+    cout << "Exciting Function \n";
+
+    cout << textPosition->at(2).x << " " << textPosition->at(2).y << "\n";
+
+
+   // cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fontSize);
+
+    //charSize = initMatrix(cv::Point(50,50), textPosition, 10.0);
+
+
+
+
+
+   
+
+
+
+
+
 
 
     // Show images
