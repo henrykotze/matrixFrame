@@ -46,6 +46,7 @@ class element {
         cv::Point getPosition();
         cv::Scalar getColor();
         element(cv::Point, cv::Scalar);
+        element();
     private:
         cv::Point textPos;
         cv::Scalar color;
@@ -55,6 +56,11 @@ element::element(cv::Point pos, cv::Scalar colr){
     textPos = pos;
     color = colr;
 
+}
+
+element::element(){
+    textPos = cv::Point();
+    color = cv::Scalar();
 }
 
 void element::setColor(cv::Scalar colr){
@@ -71,6 +77,11 @@ cv::Point element::getPosition(){
 cv::Scalar element::getColor(){
     return color;
 }
+
+
+
+cv::Point initMatrixMem(cv::Point frameSize, vector<element>* textPos, double fontSize);
+void drawFrame(cv::Mat frame, vector<element>* textInfo);
 
 int main( int argc, char** argv )
 {
@@ -126,6 +137,12 @@ int main( int argc, char** argv )
     //charSize = initMatrix(cv::Point(50,50), textPosition, 10.0);
 
 
+    // Memory allocated classs testing
+    vector<element>* bar = new vector<element>();
+
+    cout << "Entering Memory allocated class type funtion \n";
+    cv::Point charSize2 = initMatrixMem(cv::Point(50,50), bar, 10.0);
+    cout << "Exciting Memory allocated class type funtion \n";
 
 
 
@@ -320,6 +337,49 @@ cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fon
 
     }
 
+
+
+}
+
+cv::Point initMatrixMem(cv::Point frameSize, vector<element>* textInfo, double fontSize){
+    double rows = double(frameSize.x);
+    double cols = double(frameSize.y);
+    char test = 100;
+    string text(&test);
+
+
+    // Needs to be tested
+    //int cols_steps = double(frameSize.x)/fontSize;
+    //int rows_steps = double(frameSize.y)/fontSize;
+
+
+    int cols_steps = cols/fontSize;
+    int rows_steps = rows/fontSize;
+    
+    int rows_iter = 0;
+    int cols_iter = fontSize;
+    int test1 = 0;
+
+    for(int j = 0; j < cols_steps; j++){
+        for(int i = 0; i < rows_steps ; i++){
+            textInfo->push_back(element(cv::Point(cols_iter, rows_iter), cv::Scalar()));
+            text = char(int(rng.uniform(0, 127)));
+            rows_iter = rows_iter + fontSize;
+            test1 += 1;
+        }
+        cols_iter = cols_iter + fontSize; 
+        rows_iter = 0 ;
+
+    }
+
+
+
+}
+
+void drawFrame(cv::Mat frame, vector<element>* textInfo){
+
+
+//cv::putText(frame, text, cv::Point(cols_iter,rows_iter), cv::FONT_HERSHEY_DUPLEX, 0.25, cv::Scalar(80, 100 , 30), 1, cv::LINE_8);
 
 
 }
