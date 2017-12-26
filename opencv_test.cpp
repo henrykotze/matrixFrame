@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 #include "element.hpp"
+#include "functions.hpp"
 
 using namespace std;
 
@@ -29,22 +30,6 @@ int fontsize = 2 ;
 int max_fontsize = 255 ; 
 
 
-
-void threshold_callback(int, void*);
-void textsize_callback(int, void*);
-void fillText(cv::Mat frame, double fontsize);
-
-vector<vector<cv::Point>> getContours(cv::Mat frame);
-
-
-cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fontSize);
-
-
-
-
-
-cv::Point initMatrixMem(cv::Point frameSize, vector<element>* textPos, double fontSize);
-void drawFrame(cv::Mat frame, vector<element>* textInfo, double font);
 
 int main( int argc, char** argv )
 {
@@ -129,6 +114,8 @@ int main( int argc, char** argv )
     }
     return 0;
 }
+
+
 
 void threshold_callback(int, void*){
 
@@ -242,9 +229,7 @@ void fillText(cv::Mat frame, double font){
     cv::imshow("filled rows", frame);
 
 }
-/*  Finds the contours in the frame, and returns
-    the pixel locations of each contour.
-    */
+
 vector<vector<cv::Point>> getContours(cv::Mat frame){
 
     cv::Mat canny_output;
@@ -259,10 +244,7 @@ vector<vector<cv::Point>> getContours(cv::Mat frame){
 
     return contours;    
 }
-/*  frameSize:  Contains width and height of frame
-    textPos:    Pointer which contains the positions of each location of text on frame
-    return:     The width and height of 
-    */
+
 cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fontSize){
     double rows = double(frameSize.x);
     double cols = double(frameSize.y);
