@@ -325,7 +325,7 @@ cv::Point initMatrixMem(cv::Point frameSize, vector<element>* textInfo, double f
 
     for(int j = 0; j < cols_steps; j++){
         for(int i = 0; i < rows_steps ; i++){
-            textInfo->push_back(element(cv::Point(cols_iter, rows_iter), cv::Scalar()));
+            textInfo->push_back(element(cv::Point(cols_iter, rows_iter), cv::Scalar() ,'c'));
             text = char(int(rng.uniform(0, 127)));
             rows_iter = rows_iter + fontSize;
             test1 += 1;
