@@ -44,7 +44,7 @@ cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fon
 
 
 cv::Point initMatrixMem(cv::Point frameSize, vector<element>* textPos, double fontSize);
-void drawFrame(cv::Mat frame, vector<element>* textInfo);
+void drawFrame(cv::Mat frame, vector<element>* textInfo, double font);
 
 int main( int argc, char** argv )
 {
@@ -85,7 +85,7 @@ int main( int argc, char** argv )
  //   cv::namedWindow( "original image", cv::WINDOW_AUTOSIZE );
 
 
-    fillText(image, 7);
+//    fillText(image, 7);
 
     vector<cv::Point>* textPosition = new vector<cv::Point>();
     cout << " Entering Function \n";
@@ -104,9 +104,9 @@ int main( int argc, char** argv )
     vector<element>* bar = new vector<element>();
 
     cout << "Entering Memory allocated class type funtion \n";
-    cv::Point charSize2 = initMatrixMem(cv::Point(50,50), bar, 10.0);
+    cv::Point charSize2 = initMatrixMem(cv::Point(image.rows,image.cols), bar, 10.0);
     cout << "Exciting Memory allocated class type funtion \n";
-
+    drawFrame(image,bar, 10.0);
 
 
    
@@ -339,31 +339,32 @@ cv::Point initMatrixMem(cv::Point frameSize, vector<element>* textInfo, double f
 
 }
 
-void drawFrame(cv::Mat frame, vector<element>* textInfo){
+void drawFrame(cv::Mat frame, vector<element>* textInfo, double font){
     double cols = double(frame.cols) ;
     double rows = double(frame.rows) ;
-    int fontSize = 11; 
     char test = 100 ;
     string text(&test);
 
-    int cols_steps = cols/fontSize;
-    int rows_steps = rows/fontSize;
+    int cols_steps = cols/font;
+    int rows_steps = rows/font;
     
     int rows_iter = 0;
-    int cols_iter = fontSize;
+    int cols_iter = font;
     int test1 = 0;
 
     for(int j = 0; j < cols_steps; j++){
         for(int i = 0; i < rows_steps ; i++){
 
             cv::putText(frame, textInfo->at(test1).getText(), textInfo->at(test1).getPosition(), cv::FONT_HERSHEY_DUPLEX, 0.2, textInfo->at(test1).getColor(), 1, cv::LINE_8,false);
-            rows_iter = rows_iter + fontSize;
+            rows_iter = rows_iter + font;
             test1 += 1;
         }
-        cols_iter = cols_iter + fontSize; 
+        cols_iter = cols_iter + font; 
         rows_iter = 0 ;
 
     }
+    cv::namedWindow("filled rows", CV_WINDOW_AUTOSIZE);
+    cv::imshow("filled rows", frame);
 
 
 
