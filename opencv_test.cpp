@@ -2,7 +2,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include "opencv2/core/utility.hpp"
+#include <opencv2/core/utility.hpp>
 #include <opencv2/opencv.hpp>
 
 #include <iostream>
@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "element.hpp"
 
 using namespace std;
 
@@ -38,45 +40,6 @@ vector<vector<cv::Point>> getContours(cv::Mat frame);
 cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fontSize);
 
 
-
-class element {
-    public:
-        void setPosition(cv::Point pos);
-        void setColor(cv::Scalar);
-        cv::Point getPosition();
-        cv::Scalar getColor();
-        element(cv::Point, cv::Scalar);
-        element();
-    private:
-        cv::Point textPos;
-        cv::Scalar color;
-};
-
-element::element(cv::Point pos, cv::Scalar colr){
-    textPos = pos;
-    color = colr;
-
-}
-
-element::element(){
-    textPos = cv::Point();
-    color = cv::Scalar();
-}
-
-void element::setColor(cv::Scalar colr){
-    color = colr;
-}
-
-void element::setPosition(cv::Point pos){
-    textPos = pos;
-}
-
-cv::Point element::getPosition(){
-    return textPos;
-}
-cv::Scalar element::getColor(){
-    return color;
-}
 
 
 
