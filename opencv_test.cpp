@@ -325,7 +325,7 @@ cv::Point initMatrixMem(cv::Point frameSize, vector<element>* textInfo, double f
 
     for(int j = 0; j < cols_steps; j++){
         for(int i = 0; i < rows_steps ; i++){
-            textInfo->push_back(element(cv::Point(cols_iter, rows_iter), cv::Scalar() ,'c'));
+            textInfo->push_back(element(cv::Point(cols_iter, rows_iter), cv::Scalar() ,string("s")));
             text = char(int(rng.uniform(0, 127)));
             rows_iter = rows_iter + fontSize;
             test1 += 1;
@@ -340,9 +340,34 @@ cv::Point initMatrixMem(cv::Point frameSize, vector<element>* textInfo, double f
 }
 
 void drawFrame(cv::Mat frame, vector<element>* textInfo){
+    double cols = double(frame.cols) ;
+    double rows = double(frame.rows) ;
+    int fontSize = 11; 
+    char test = 100 ;
+    string text(&test);
+
+    int cols_steps = cols/fontSize;
+    int rows_steps = rows/fontSize;
+    
+    int rows_iter = 0;
+    int cols_iter = fontSize;
+    int test1 = 0;
+
+    for(int j = 0; j < cols_steps; j++){
+        for(int i = 0; i < rows_steps ; i++){
+
+            cv::putText(frame, textInfo->at(test1).getText(), textInfo->at(test1).getPosition(), cv::FONT_HERSHEY_DUPLEX, 0.2, textInfo->at(test1).getColor(), 1, cv::LINE_8,false);
+            rows_iter = rows_iter + fontSize;
+            test1 += 1;
+        }
+        cols_iter = cols_iter + fontSize; 
+        rows_iter = 0 ;
+
+    }
 
 
-//cv::putText(frame, text, cv::Point(cols_iter,rows_iter), cv::FONT_HERSHEY_DUPLEX, 0.25, cv::Scalar(80, 100 , 30), 1, cv::LINE_8);
+
+
 
 
 }

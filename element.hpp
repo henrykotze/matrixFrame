@@ -19,19 +19,19 @@ class element {
     public:
         void setPosition(cv::Point pos);
         void setColor(cv::Scalar);
-        void setText(char);
+        void setText(std::string);
         cv::Point getPosition();
         cv::Scalar getColor();
-        char getText();
-        element(cv::Point, cv::Scalar, char);
+        std::string getText();
+        element(cv::Point, cv::Scalar, std::string);
         element();
     private:
         cv::Point textPos;
         cv::Scalar color;
-        char text;
+        std::string text;
 };
 
-element::element(cv::Point pos, cv::Scalar colr, char txt){
+element::element(cv::Point pos, cv::Scalar colr, std::string txt){
     textPos = pos;
     color = colr;
     text = txt;
@@ -41,7 +41,7 @@ element::element(cv::Point pos, cv::Scalar colr, char txt){
 element::element(){
     textPos = cv::Point();
     color = cv::Scalar();
-    text = ' ';
+    text = std::string();
 }
 
 void element::setColor(cv::Scalar colr){
@@ -58,10 +58,10 @@ cv::Point element::getPosition(){
 cv::Scalar element::getColor(){
     return color;
 }
-void element::setText(char txt){
+void element::setText(std::string txt){
     text = txt;
 }
-char element::getText(){
+std::string element::getText(){
     return text;
 }
 
