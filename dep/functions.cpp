@@ -1,13 +1,4 @@
-#include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/core/utility.hpp>
-#include <opencv2/opencv.hpp>
 
-// User defined header file
 #include "element.hpp"
 #include "functions.hpp"
 using namespace std;

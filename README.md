@@ -13,9 +13,11 @@ matrixFrame tries to create a "The Matrix" art of a input frame. As seen here:
 
 ## How to compile
 
-*   Currently: ```g++ opencv_test.cpp `pkg-congig --libs opencv` -std=c++11 -o opencvtest ```
+*   Currently: run the compile script : ```./compile```
 
+## How things are done
 
+*   In the ./dep directory is all the dependancies for the matrixFrame. Each one containing the classes and function declarations.
 
 ## Future Plans
 ----
