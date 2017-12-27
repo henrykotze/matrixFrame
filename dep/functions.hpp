@@ -16,12 +16,8 @@
 using namespace std;
 
 vector<vector<cv::Point>> getContours(cv::Mat frame);
-cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fontSize);
 cv::Point initMatrixMem(cv::Point frameSize, vector<element>* textPos, double fontSize);
 void drawFrame(cv::Mat frame, vector<element>* textInfo, double font);
-void threshold_callback(int, void*);
-void textsize_callback(int, void*);
-void fillText(cv::Mat frame, double fontsize);
 void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, cv::Point textSize);
 
 #endif
