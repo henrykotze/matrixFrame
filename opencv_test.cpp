@@ -11,23 +11,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "element.hpp"
-#include "functions.hpp"
+#include "./dep/element.hpp"
+#include "./dep/functions.hpp"
 
 using namespace std;
-
-// Globals 
-cv::Mat image;
-cv::Mat image_gray;
-cv::Mat image_copy;
-
-int thresh = 100;
-int max_thresh = 255; 
-cv::RNG rng(12345);
-
-//globals for trackbars
-int fontsize = 2 ; 
-int max_fontsize = 255 ; 
 
 
 
@@ -35,6 +22,7 @@ int main( int argc, char** argv )
 {
     
     string imageName("/home/henry/Documents/github_dev/matrixFrame/opencv_nic2.jpg"); // by default
+    cv::Mat image;
 
 
     int exit = 0;
@@ -47,45 +35,12 @@ int main( int argc, char** argv )
 
     //Loading Image to be Processed
     image = cv::imread(imageName.c_str(), cv::IMREAD_COLOR); // Read the file
-    image_copy = image;
-    vector<int> image_size(image.cols, image.rows);
-
-    cout << "image cols: " << image_size.at(1) << " image rows: " << image_size.at(2) << endl;
-
-
-    //Convert image to gray scale
-    cv::cvtColor(image,image_gray,CV_BGR2GRAY);
-
-
-
-
-
-
     if( image.empty() )                      // Check for invalid input
     {
         cout <<  "Could not open or find the image" << std::endl ;
         return -1;
     }
-    // Creating Windows
- //   cv::namedWindow( "original image", cv::WINDOW_AUTOSIZE );
 
-
-//    fillText(image, 7);
-
-    vector<cv::Point>* textPosition = new vector<cv::Point>();
-    cout << " Entering Function \n";
-    cv::Point charSize = initMatrix(cv::Point(50,50), textPosition, 10.0);
-    cout << "Exciting Function \n";
-
-    cout << textPosition->at(2).x << " " << textPosition->at(2).y << "\n";
-
-
-   // cv::Point initMatrix(cv::Point frameSize, vector<cv::Point>* textPos, double fontSize);
-
-    //charSize = initMatrix(cv::Point(50,50), textPosition, 10.0);
-
-
-    // Memory allocated classs testing
     vector<element>* bar = new vector<element>();
 
     cout << "Entering Memory allocated class type funtion \n";
@@ -93,20 +48,6 @@ int main( int argc, char** argv )
     cout << "Exciting Memory allocated class type funtion \n";
     drawFrame(image,bar, 10.0);
 
-
-   
-
-
-
-
-
-
-
-    // Show images
-//    cv::imshow( "original image", image );
-//    cv::createTrackbar( " Canny threshold:", "original image", &thresh, max_thresh, threshold_callback );
-//   cv::createTrackbar( " Font Size:", "original image", &fontsize, max_fontsize, textsize_callback );
-//   threshold_callback( 0, 0 );  
 
     cout << "To exit press Escape \n";
     while(exit != 27){
@@ -116,7 +57,7 @@ int main( int argc, char** argv )
 }
 
 
-
+/*
 void threshold_callback(int, void*){
 
     cv::Mat canny_output;
@@ -358,3 +299,4 @@ void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, 
 
 
 }
+*/
