@@ -29,6 +29,12 @@ int main( int argc, char** argv )
         return -1;
     }
 
+    int thresh = 0;
+    setThreshold(image,thresh,255 );
+
+
+
+/*
     vector<element>* bar = new vector<element>();
 
     cout << "Entering Memory allocated class type funtion \n";
@@ -47,6 +53,9 @@ int main( int argc, char** argv )
     while(exit != 27){
         exit = cv::waitKey(0); // Wait for Escape to exit
     }
+
+
+*/
     return 0;
 }
 
