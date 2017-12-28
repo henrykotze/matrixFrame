@@ -36,10 +36,11 @@ int main( int argc, char** argv )
     cout << "Exciting Memory allocated class type funtion \n";
     drawFrame(image,bar, 10.0);
 
-    vector<vector<cv::Point>> contours = getContours(image, 100);
+    vector<vector<cv::Point>> contours = getContours(image, 200);
 
 
-    updateFrame(contours, bar, cv::Point(10,10));
+    updateFrame(contours, bar, cv::Point(5,5));
+    drawFrame(image,bar, 10.0);
 
 
     cout << "To exit press Escape \n";
