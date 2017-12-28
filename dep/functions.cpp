@@ -15,7 +15,9 @@ vector<vector<cv::Point>> getContours(cv::Mat frame, int thresh){
     cv::Canny(image_gray, canny_output, thresh, thresh*2,3);
 
     //Detect contours and store in memory
-    cv::findContours(canny_output, contours, hierarchy, CV_RETR_TREE,CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
+
+    //TODO: READ on about the mode varaible for cv::findContours
+    cv::findContours(canny_output, contours, hierarchy, CV_RETR_TREE,CV_RETR_EXTERNAL, cv::Point(0,0));
 
     return contours;    
 }
@@ -41,7 +43,7 @@ cv::Point initMatrixMem(cv::Point frameSize, vector<element>* textInfo, double f
 
     for(int j = 0; j < cols_steps; j++){
         for(int i = 0; i < rows_steps ; i++){
-            textInfo->push_back(element(cv::Point(cols_iter, rows_iter), cv::Scalar() ,string("s")));
+            textInfo->push_back(element(cv::Point(cols_iter, rows_iter), cv::Scalar(0,255,0) ,string("s")));
             rows_iter = rows_iter + fontSize;
             test1 += 1;
         }
@@ -88,13 +90,14 @@ void drawFrame(cv::Mat frame, vector<element>* textInfo, double font){
 
 void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, cv::Point textSize){
 
-    int width = 10;
-    int height = 10;
+    int width = textSize.x;
+    int height = textSize.y;
+    vector<cv::Point> known();
 
     for(size_t i = 0; i < contours.size(); i++){
         cout << "New contour: " << i << endl;
         for(size_t j = 0; j < contours.at(i).size(); j++){
-            cout << "x: "  << contours.at(i).at(j).x << " y: " << contours.at(i).at(j).y << endl;
+            //cout << "x: "  << contours.at(i).at(j).x << " y: " << contours.at(i).at(j).y << endl;
             int xx = contours.at(i).at(j).x;
             int yy = contours.at(i).at(j).y;
 
@@ -108,7 +111,7 @@ void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, 
 //           if( (x + width > xx)  and  (y - height  < yy) and (xx - width < x) and (yy + height > y)){
            if( (xx - x) < width and (xx - x) > 0 and (y - yy) < height and (y - yy) > 0){
 
-                    cout << "testing:\n-------------\n";
+                    //cout << "testing:\n-------------\n";
 /*
                     cout << "x+width=" << x + width << endl;
                     cout << "xx-width=" << xx - width << endl;
@@ -117,27 +120,10 @@ void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, 
                     
 */
                     textInfo->at(k).setColor(cv::Scalar(255,0,0));
-
                }  
-
-
-
-
-
             }
-
-
-
-
-
         }
     } 
-   
-
-
-
-
-
 }
 
 

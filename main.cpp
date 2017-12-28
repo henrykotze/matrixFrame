@@ -9,7 +9,7 @@ using namespace std;
 int main( int argc, char** argv )
 {
     
-    string imageName("/home/henry/Documents/github_dev/matrixFrame/images/opencv_nic2.jpg"); // by default
+    string imageName("/home/henry/Documents/github_dev/matrixFrame/images/V3.jpg"); // by default
     cv::Mat image;
 
 
@@ -39,8 +39,9 @@ int main( int argc, char** argv )
     vector<vector<cv::Point>> contours = getContours(image, 200);
 
 
-    updateFrame(contours, bar, cv::Point(5,5));
+    updateFrame(contours, bar, cv::Point(8,8));
     drawFrame(image,bar, 10.0);
+    cv::imwrite("./output.jpg", image);
 
 
     cout << "To exit press Escape \n";
