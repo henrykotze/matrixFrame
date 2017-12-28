@@ -87,6 +87,42 @@ void drawFrame(cv::Mat frame, vector<element>* textInfo, double font){
 
 void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, cv::Point textSize){
 
+    int width = textSize.x ;
+    int height = textSize.y ;
+
+    for(size_t i = 0; i < contours.size(); i++){
+        cout << "New contour: " << i << endl;
+        for(size_t j = 0; j < contours.at(i).size(); j++){
+            cout << "x: "  << contours.at(i).at(j).x << " y: " << contours.at(i).at(j).y << endl;
+            int xx = contours.at(i).at(j).x;
+            int yy = contours.at(i).at(j).y;
+
+
+            for(size_t k = 0; k < textInfo->size(); k++){
+               int x = textInfo->at(k).getPosition().x;
+               int y = textInfo->at(k).getPosition().y;
+
+               if( (x + width) > xx and (y + height) > yy and (xx - width) < x and (yy - height) < y){
+                   cout << "match" << endl;
+                   cout << "countours: " << xx << "," << yy << endl;
+                   cout << "text: " << x << "," << y << endl;
+               }  
+
+
+
+
+
+            }
+
+
+
+
+
+        }
+    } 
+   
+
+
 
 
 
