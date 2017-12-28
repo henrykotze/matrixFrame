@@ -12,4 +12,5 @@ rm ./matrixFrame
 echo "Removing compile.log"
 rm ./compile.log
 
+echo "Done"
 
