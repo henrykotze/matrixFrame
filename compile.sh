@@ -10,7 +10,7 @@ g++ ./dep/functions.cpp `pkg-config --libs opencv` -std=c++11 -c | tee -a compil
 echo "Compiling main.cpp" | tee -a compile.log
 g++ main.cpp `pkg-config --libs opencv` -std=c++11 -c  | tee -a compile.log
 
-echo "Linking" | tee -a compile.log
-g++ functions.o element.o main.o -o matrixFrame | tee -a compile.log
+echo "Linking object files" | tee -a compile.log
+g++ -std=c++11 `pkg-config --libs opencv` functions.o element.o main.o -o matrixFrame | tee -a compile.log
 
 echo "Done"
