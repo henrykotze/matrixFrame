@@ -1,6 +1,15 @@
 
 #include "element.hpp"
 #include "functions.hpp"
+
+
+#include "opencv2/imgcodecs.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+
+
+
+
 using namespace std;
 
 vector<vector<cv::Point>> getContours(cv::Mat frame, int thresh){
@@ -119,23 +128,39 @@ void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, 
                     textInfo->at(k).setColor(cv::Scalar(255,0,0));
 
                }  
-
-
-
-
-
             }
-
-
-
-
-
         }
     } 
-   
+}
+
+void threshold_callback(int pos, void* image){
+
+    cv::Mat* casted = static_cast<cv::Mat*>(image);
+    cv::Mat meep = *casted;
+    cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
+    cv::imshow("test", meep);
+   int exit = 0; 
+    while(exit != 27){
+        exit = cv::waitKey(0); // Wait for Escape to exit
+    }
 
 
 
+
+
+}
+
+void setThreshold(cv::Mat frame, int thresh, int max_thresh){
+    cv::Mat gray_image;
+    cv::cvtColor(frame, gray_image, CV_BGR2GRAY);
+    
+    cv::namedWindow("source_image", CV_WINDOW_AUTOSIZE);
+    cv::imshow("source_image", frame);
+
+    createTrackbar(" Canny Threshold:","source_image", &thresh, max_thresh, threshold_callback, &gray_image);
+    cv::waitKey(0);
+
+    
 
 
 }
