@@ -5,7 +5,7 @@ echo "Creating build dir"
 mkdir -p ./build
 
 echo "Compiling element.cpp"
-g++ -c ./dep/element.cpp `pkg-config --libs opencv` -std=c++11 -o ./build/element.o -v | tee -a ./build/compile.log
+g++ -c ./dep/element.cpp `pkg-config --libs opencv` -std=c++11 -o ./build/element.o  | tee -a ./build/compile.log
 
 echo "Compiling functions.cpp"  | tee -a compile.log
 g++ -c ./dep/functions.cpp `pkg-config --libs opencv` -std=c++11 -o ./build/functions.o | tee -a ./build/compile.log
