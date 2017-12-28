@@ -80,6 +80,7 @@ void drawFrame(cv::Mat frame, vector<element>* textInfo, double font){
     }
     cv::namedWindow("filled rows", CV_WINDOW_AUTOSIZE);
     cv::imshow("filled rows", frame);
+    cv::waitKey(1000);
 
 }
 
@@ -104,18 +105,19 @@ void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, 
 
 
 
-           if( (x + width > xx)  and  (y - height  < yy) and (xx - width < x) and (yy + height > y)){
+//           if( (x + width > xx)  and  (y - height  < yy) and (xx - width < x) and (yy + height > y)){
+           if( (xx - x) < width and (xx - x) > 0 and (y - yy) < height and (y - yy) > 0){
 
-                    cout << "testing:\n";
+                    cout << "testing:\n-------------\n";
+/*
                     cout << "x+width=" << x + width << endl;
-                    cout << "xx-width=" << x - width << endl;
+                    cout << "xx-width=" << xx - width << endl;
                     cout << "y - height=" << y - height << endl;
                     cout << "yy + height=" << yy + height << endl;
+                    
+*/
+                    textInfo->at(k).setColor(cv::Scalar(255,0,0));
 
-
-                   cout << "match" << endl;
-                   cout << "countours: " << xx << "," << yy << endl;
-                   cout << "text: " << x << "," << y << endl;
                }  
 
 
