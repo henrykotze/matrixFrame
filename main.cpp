@@ -40,13 +40,19 @@ int main( int argc, char** argv )
     vector<element>* bar = new vector<element>();
 
     cout << "Entering Memory allocated class type funtion \n";
-    cv::Point charSize2 = initMatrixMem(cv::Point(image.rows,image.cols), bar, 8.0);
+    cv::Point charSize2 = initMatrixMem(cv::Point(image.rows,image.cols), bar, 10.0);
     cout << "Exciting Memory allocated class type funtion \n";
-    drawFrame(image,bar, 8.0);
 
+    cout << "Drawing Initial Frame \n";
+    drawFrame(image,bar, 10.0);
+    cout << "Finished Initial Frame \n\n";
+
+
+    cout << "getContours \n";
     vector<vector<cv::Point>> contours = getContours(image, *thresh);
+    cout << "Done with getContours \n";
 
-
+    
     updateFrame(contours, bar, cv::Point(8,8));
     drawFrame(image,bar, 10.0);
     cv::imwrite("./output.jpg", image);
