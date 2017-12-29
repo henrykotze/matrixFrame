@@ -108,6 +108,7 @@ void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, 
             int yy = contours.at(i).at(j).y;
 
 
+
             for(size_t k = 0; k < textInfo->size(); k++){
                int x = textInfo->at(k).getPosition().x;
                int y = textInfo->at(k).getPosition().y;
@@ -125,7 +126,7 @@ void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, 
                     cout << "yy + height=" << yy + height << endl;
                     
 */
-                    textInfo->at(k).setColor(cv::Scalar(255,0,0));
+                    //textInfo->at(k).setColor(cv::Scalar(255,0,0));
 
                }  
             }
@@ -136,32 +137,37 @@ void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, 
 void threshold_callback(int pos, void* image){
 
     cv::Mat* casted = static_cast<cv::Mat*>(image);
-    cv::Mat meep = *casted;
-    cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
-    cv::imshow("test", meep);
-   int exit = 0; 
-    while(exit != 27){
-        exit = cv::waitKey(0); // Wait for Escape to exit
+    cv::Mat gray_image = *casted;
+    cv::Mat canny_output;
+
+    vector<vector<cv::Point>> contours;
+    vector<cv::Vec4i> hierarchy;
+
+    cv::Canny(gray_image, canny_output, pos, pos*2,3);
+    cv::findContours(canny_output, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
+    cv::Mat drawing = cv::Mat::zeros( canny_output.size(), CV_8UC3 );
+    for(size_t i = 0; i < contours.size(); i++){
+       cv::drawContours(drawing, contours, int(i), cv::Scalar(0,255,0), 2, 8, hierarchy, 0, cv::Point());
+       
     }
-
-
-
+    cv::namedWindow("Determine Threshold", CV_WINDOW_AUTOSIZE);
+    cv::imshow("Determine Threshold", drawing);
 
 
 }
 
-void setThreshold(cv::Mat frame, int thresh, int max_thresh){
+void setThreshold(cv::Mat frame, int* thresh, int max_thresh){
     cv::Mat gray_image;
     cv::cvtColor(frame, gray_image, CV_BGR2GRAY);
     
     cv::namedWindow("source_image", CV_WINDOW_AUTOSIZE);
     cv::imshow("source_image", frame);
 
-    createTrackbar(" Canny Threshold:","source_image", &thresh, max_thresh, threshold_callback, &gray_image);
-    cv::waitKey(0);
-
-    
-
+    createTrackbar(" Canny Threshold:","source_image", thresh, max_thresh, threshold_callback, &gray_image);
+    int exit = 0;
+    while(exit != 27){
+        exit = cv::waitKey(0);
+    }
 
 }
 

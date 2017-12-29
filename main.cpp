@@ -9,7 +9,7 @@ using namespace std;
 int main( int argc, char** argv )
 {
     
-    string imageName("/home/henry/Documents/github_dev/matrixFrame/images/opencv_nic2.jpg"); // by default
+    string imageName("/home/henry/Documents/github_dev/matrixFrame/images/v2.jpg"); // by default
     cv::Mat image;
 
 
@@ -29,23 +29,25 @@ int main( int argc, char** argv )
         return -1;
     }
 
-    int thresh = 0;
+    int* thresh = new int(255);
     setThreshold(image,thresh,255 );
 
+    cout << *thresh << endl;
 
 
-/*
+
+
     vector<element>* bar = new vector<element>();
 
     cout << "Entering Memory allocated class type funtion \n";
-    cv::Point charSize2 = initMatrixMem(cv::Point(image.rows,image.cols), bar, 10.0);
+    cv::Point charSize2 = initMatrixMem(cv::Point(image.rows,image.cols), bar, 8.0);
     cout << "Exciting Memory allocated class type funtion \n";
-    drawFrame(image,bar, 10.0);
+    drawFrame(image,bar, 8.0);
 
-    vector<vector<cv::Point>> contours = getContours(image, 200);
+    vector<vector<cv::Point>> contours = getContours(image, *thresh);
 
 
-    updateFrame(contours, bar, cv::Point(5,5));
+    updateFrame(contours, bar, cv::Point(3,3));
     drawFrame(image,bar, 10.0);
 
 
@@ -55,7 +57,7 @@ int main( int argc, char** argv )
     }
 
 
-*/
+
     return 0;
 }
 

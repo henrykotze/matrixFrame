@@ -14,6 +14,6 @@ void drawFrame(cv::Mat frame, vector<element>* textInfo, double font);
 void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, cv::Point textSize);
 
 void threshold_callback(int pos, void* image);
-void setThreshold(cv::Mat frame, int thresh, int max_tresh);
+void setThreshold(cv::Mat frame, int* thresh, int max_tresh);
 
 #endif
