@@ -146,6 +146,7 @@ void threshold_callback(int pos, void* image){
     cv::Canny(gray_image, canny_output, pos, pos*2,3);
     cv::findContours(canny_output, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
     cv::Mat drawing = cv::Mat::zeros( canny_output.size(), CV_8UC3 );
+
     for(size_t i = 0; i < contours.size(); i++){
        cv::drawContours(drawing, contours, int(i), cv::Scalar(0,255,0), 2, 8, hierarchy, 0, cv::Point());
        
