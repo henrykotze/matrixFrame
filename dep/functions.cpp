@@ -12,8 +12,10 @@
 
 using namespace std;
 
-vector<vector<cv::Point>> getContours(cv::Mat frame, int thresh){
+vector<vector<cv::Point>> getContours(cv::Mat frame, int* thresh){
 
+
+    cout << *thresh << endl;
     cv::Mat canny_output;
     cv::Mat image_gray;
     vector<vector<cv::Point>> contours;
@@ -21,12 +23,14 @@ vector<vector<cv::Point>> getContours(cv::Mat frame, int thresh){
     cv::cvtColor(frame,image_gray,CV_BGR2GRAY);
     
     //Canny the image
-    cv::Canny(image_gray, canny_output, thresh, thresh*2,3);
+    cout << "Canny \n";
+    cv::Canny(image_gray, canny_output, *thresh, *thresh*2,3);
 
     //Detect contours and store in memory
 
     //TODO: READ on about the mode varaible for cv::findContours
-    cv::findContours(canny_output, contours, hierarchy, CV_RETR_TREE,CV_RETR_EXTERNAL, cv::Point(0,0));
+    cout << "findContours \n";
+    cv::findContours(canny_output, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
 
     return contours;    
 }

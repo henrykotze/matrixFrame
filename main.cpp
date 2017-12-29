@@ -9,7 +9,7 @@ using namespace std;
 int main( int argc, char** argv )
 {
     
-    string imageName("/home/henry/Documents/github_dev/matrixFrame/images/V3.jpg"); // by default
+    string imageName("/home/henry/Documents/github_dev/matrixFrame/images/v3.jpg"); // by default
     cv::Mat image;
 
 
@@ -49,7 +49,7 @@ int main( int argc, char** argv )
 
 
     cout << "getContours \n";
-    vector<vector<cv::Point>> contours = getContours(image, *thresh);
+    vector<vector<cv::Point>> contours = getContours(image, thresh);
     cout << "Done with getContours \n";
 
     
