@@ -1,6 +1,15 @@
 
 #include "element.hpp"
 #include "functions.hpp"
+
+
+#include "opencv2/imgcodecs.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+
+
+
+
 using namespace std;
 
 vector<vector<cv::Point>> getContours(cv::Mat frame, int thresh){
@@ -100,6 +109,7 @@ void updateFrame(vector<vector<cv::Point>> contours, vector<element>* textInfo, 
             //cout << "x: "  << contours.at(i).at(j).x << " y: " << contours.at(i).at(j).y << endl;
             int xx = contours.at(i).at(j).x;
             int yy = contours.at(i).at(j).y;
+
 
 
             for(size_t k = 0; k < textInfo->size(); k++){

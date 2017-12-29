@@ -29,14 +29,22 @@ int main( int argc, char** argv )
         return -1;
     }
 
+    int* thresh = new int(255);
+    setThreshold(image,thresh,255 );
+
+    cout << *thresh << endl;
+
+
+
+
     vector<element>* bar = new vector<element>();
 
     cout << "Entering Memory allocated class type funtion \n";
-    cv::Point charSize2 = initMatrixMem(cv::Point(image.rows,image.cols), bar, 10.0);
+    cv::Point charSize2 = initMatrixMem(cv::Point(image.rows,image.cols), bar, 8.0);
     cout << "Exciting Memory allocated class type funtion \n";
-    drawFrame(image,bar, 10.0);
+    drawFrame(image,bar, 8.0);
 
-    vector<vector<cv::Point>> contours = getContours(image, 200);
+    vector<vector<cv::Point>> contours = getContours(image, *thresh);
 
 
     updateFrame(contours, bar, cv::Point(8,8));
@@ -48,6 +56,9 @@ int main( int argc, char** argv )
     while(exit != 27){
         exit = cv::waitKey(0); // Wait for Escape to exit
     }
+
+
+
     return 0;
 }
 
