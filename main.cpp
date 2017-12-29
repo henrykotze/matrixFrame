@@ -9,8 +9,11 @@ using namespace std;
 int main( int argc, char** argv )
 {
     
-    string imageName("/home/henry/Documents/github_dev/matrixFrame/images/v3.jpg"); // by default
+    string imageName("/home/henry/Documents/github_dev/matrixFrame/images/v.jpg"); // by default
     cv::Mat image;
+    cv::Mat orig_image;
+
+    double fontsize = 6.0;
 
 
     int exit = 0;
@@ -23,6 +26,12 @@ int main( int argc, char** argv )
 
     //Loading Image to be Processed
     image = cv::imread(imageName.c_str(), cv::IMREAD_COLOR); // Read the file
+    orig_image = cv::imread(imageName.c_str(), cv::IMREAD_COLOR); 
+
+    cv::Mat drawing = cv::Mat::zeros( image.size(), CV_8UC3 );
+
+
+
     if( image.empty() )                      // Check for invalid input
     {
         cout <<  "Could not open or find the image" << std::endl ;
@@ -39,23 +48,17 @@ int main( int argc, char** argv )
 
     vector<element>* bar = new vector<element>();
 
-    cout << "Entering Memory allocated class type funtion \n";
-    cv::Point charSize2 = initMatrixMem(cv::Point(image.rows,image.cols), bar, 10.0);
-    cout << "Exciting Memory allocated class type funtion \n";
+    cv::Point charSize2 = initMatrixMem(cv::Point(image.rows,image.cols), bar, fontsize);
 
-    cout << "Drawing Initial Frame \n";
-    drawFrame(image,bar, 10.0);
-    cout << "Finished Initial Frame \n\n";
+    drawFrame(drawing,bar, fontsize);
 
 
-    cout << "getContours \n";
-    vector<vector<cv::Point>> contours = getContours(image, thresh);
-    cout << "Done with getContours \n";
 
+    vector<vector<cv::Point>> contours = getContours(orig_image, thresh);
     
-    updateFrame(contours, bar, cv::Point(8,8));
-    drawFrame(image,bar, 10.0);
-    cv::imwrite("./output.jpg", image);
+    updateFrame(contours, bar, cv::Point(6,6));
+    drawFrame(drawing,bar, fontsize);
+    cv::imwrite("./output.jpg", drawing);
 
 
     cout << "To exit press Escape \n";
